@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input';
 const tempData = [testData]
 import { GRADE_SUBJECT_MAP } from '@/lib/constants';
+import { Fullscreen, Pen, Trash } from 'lucide-react';
 
 export default function TestManagementPage() {
     // Add search term state
@@ -43,6 +44,11 @@ export default function TestManagementPage() {
         setTests((prevTests) => prevTests.filter(test => test.id !== testId));
     };
 
+    const handlePreviewTest = (testId: string) => {
+        // hanlde preview
+        console.log(testId)
+    };
+
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
         // Implement search filtering logic here
@@ -68,7 +74,7 @@ export default function TestManagementPage() {
                     onValueChange={(value) => setGradeFilter(value)}
                 >
                     <SelectTrigger className="w-1/3">
-                        <SelectValue placeholder="Grade"/>
+                        <SelectValue placeholder="Grade" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="All">All Grades</SelectItem>
@@ -86,7 +92,7 @@ export default function TestManagementPage() {
                     onValueChange={(value) => setSubjectFilter(value)}
                 >
                     <SelectTrigger className="w-1/3">
-                        <SelectValue placeholder="Subject"/>
+                        <SelectValue placeholder="Subject" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="All Subjects">All Subjects</SelectItem>
@@ -123,17 +129,33 @@ export default function TestManagementPage() {
                                 <TableCell>{test.level}</TableCell>
                                 <TableCell>{test.subject}</TableCell>
                                 <TableCell className="flex space-x-2">
-                                    <Button variant="outline" onClick={() => console.log(`Edit test: ${test.id}`)}>
-                                        Edit
-                                    </Button>
                                     <Tooltip>
-                                        <TooltipTrigger>
+                                        <TooltipTrigger asChild>
+                                            <Button variant="default" onClick={() => handlePreviewTest(test.id)}>
+                                                <Link href={'/dashboard/test-prep/preview'}><Fullscreen /></Link>
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent>Preview this test</TooltipContent>
+                                    </Tooltip>
+
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Button variant="outline" onClick={() => console.log(`Edit test: ${test.id}`)}>
+                                                <Pen />
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent>Edit this test</TooltipContent>
+                                    </Tooltip>
+
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
                                             <Button variant="destructive" onClick={() => handleDeleteTest(test.id)}>
-                                                Delete
+                                                <Trash />
                                             </Button>
                                         </TooltipTrigger>
                                         <TooltipContent>Delete this test</TooltipContent>
                                     </Tooltip>
+
                                 </TableCell>
                             </TableRow>
                         ))}
