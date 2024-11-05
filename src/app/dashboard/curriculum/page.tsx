@@ -15,26 +15,16 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Plus, Edit, Trash2, Share2, Search } from "lucide-react"
-
-
-type Curriculum = {
-    id: string
-    name: string
-    description: string
-    subjects: string[]
-    chapters: { id: string; name: string; completed: boolean }[]
-    progress: number
-    shared: boolean
-}
+import { ICurriculum } from "@/lib/types"
 
 const subjects = ["Math", "Science", "History", "Literature", "Art", "Music"]
 
 export default function CurriculumManager() {
     const [isStudent, setIsStudent] = useState(true)
-    const [curricula, setCurricula] = useState<Curriculum[]>([])
-    const [newCurriculum, setNewCurriculum] = useState<Curriculum>({ id: "", name: "", description: "", subjects: [], chapters: [], progress: 0, shared: false })
-    const [editingCurriculum, setEditingCurriculum] = useState<Curriculum | null>(null)
-    const [selectedCurriculum, setSelectedCurriculum] = useState<Curriculum | null>(null)
+    const [curricula, setCurricula] = useState<ICurriculum[]>([])
+    const [newCurriculum, setNewCurriculum] = useState<ICurriculum>({ id: "", name: "", description: "", subjects: [], chapters: [], progress: 0, shared: false })
+    const [editingCurriculum, setEditingCurriculum] = useState<ICurriculum | null>(null)
+    const [selectedCurriculum, setSelectedCurriculum] = useState<ICurriculum | null>(null)
 
     const handleAddCurriculum = () => {
         if (newCurriculum.name) {
@@ -43,7 +33,7 @@ export default function CurriculumManager() {
         }
     }
 
-    const handleEditCurriculum = (curriculum: Curriculum) => {
+    const handleEditCurriculum = (curriculum: ICurriculum) => {
         setEditingCurriculum(curriculum)
     }
 

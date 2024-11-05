@@ -1,32 +1,14 @@
 import PreviewTest from '@/components/tests/testPreview';
-
-interface Question {
-    id: number;
-    type: 'multipleChoice' | 'trueFalse' | 'shortAnswer';
-    questionText: string;
-    options?: string[];
-    answer: string;
-    explanation?: string;
-  }
-  
-  interface PreviewTestProps {
-    test: {
-      title: string;
-      grade: string;
-      level: string;
-      subject: string;
-      passRate: number;
-      questions: Question[];
-    };
-  }
+import { ITest } from '@/lib/types';
 
 export default function TestPage() {
   // Example test data
-  const test = {
+  const test: ITest = {
     title: 'Math Quiz',
     grade: '3',
     level: 'beginner',
     subject: 'Mathematics',
+    passRate: 80,
     questions: [
       {
         id: 1,
