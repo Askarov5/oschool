@@ -26,8 +26,7 @@ export default function CreateTest() {
     const [questionText, setQuestionText] = useState('');
     const [questionType, setQuestionType] = useState<TQuestionType>('multipleChoice');
     const [options, setOptions] = useState<string[]>(['', '']);
-    type CorrectAnswerType = string | boolean;
-    const [correctAnswer, setCorrectAnswer] = useState<CorrectAnswerType>('');
+    const [correctAnswer, setCorrectAnswer] = useState<string | boolean>('');
     const [answerExplanation, setAnswerExplanation] = useState('');
 
     const handleInputChange = (key: keyof ITest) => (value: string | number) => {
