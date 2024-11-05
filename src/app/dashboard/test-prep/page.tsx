@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table';
@@ -9,7 +9,7 @@ import { ITest } from '@/lib/types';
 import Link from 'next/link';
 
 import { testData } from '@/data/tests';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 const tempData = [testData]
 import { GRADE_SUBJECT_MAP } from '@/lib/constants';
@@ -17,25 +17,34 @@ import { GRADE_SUBJECT_MAP } from '@/lib/constants';
 export default function TestManagementPage() {
     // Add search term state
     const [searchTerm, setSearchTerm] = useState('');
-    const [gradeFilter, setGradeFilter] = useState('1'); // Default grade
-    const [subjectFilter, setSubjectFilter] = useState('');
+    const [gradeFilter, setGradeFilter] = useState('All');
+    const [subjectFilter, setSubjectFilter] = useState('All Subjects');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [subjectOptions, setSubjectOptions] = useState(GRADE_SUBJECT_MAP[gradeFilter]);
-
-    useEffect(() => {
-        // Update subject options based on the selected grade
-        setSubjectOptions(GRADE_SUBJECT_MAP[gradeFilter] || []);
-        setSubjectFilter(''); // Reset subject filter when grade changes
-    }, [gradeFilter]);
     // State to manage the list of tests
     const [tests, setTests] = useState<ITest[]>(tempData);
+
+    useEffect(() => {
+        const filtered = tempData.filter((test) => {
+            // Apply filters and search term
+            const matchesGrade = gradeFilter === 'All' || test.grade === gradeFilter;
+            const matchesSubject = subjectFilter === 'All Subjects' || test.subject === subjectFilter;
+            const matchesSearch = test.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+            return matchesGrade && matchesSubject && matchesSearch;
+        });
+
+        setTests(filtered);
+    }, [gradeFilter, subjectFilter, searchTerm]);
+
 
     // Function to delete a test
     const handleDeleteTest = (testId: string) => {
         setTests((prevTests) => prevTests.filter(test => test.id !== testId));
     };
 
-    const handleSearch = (event) => {
-        setSearchTerm(event.target.value);
+    const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
         // Implement search filtering logic here
     };
 
@@ -48,7 +57,7 @@ export default function TestManagementPage() {
 
             <div className="flex items-center space-x-4 mb-4">
                 <Input
-                    placeholder="Search tests..."
+                    placeholder="Search tests by title..."
                     value={searchTerm}
                     onChange={handleSearch}
                     className="flex-grow"
@@ -58,8 +67,11 @@ export default function TestManagementPage() {
                     value={gradeFilter}
                     onValueChange={(value) => setGradeFilter(value)}
                 >
-                    <SelectTrigger className="w-1/3">Grade</SelectTrigger>
+                    <SelectTrigger className="w-1/3">
+                        <SelectValue placeholder="Grade"/>
+                    </SelectTrigger>
                     <SelectContent>
+                        <SelectItem value="All">All Grades</SelectItem>
                         {Object.keys(GRADE_SUBJECT_MAP).map((grade) => (
                             <SelectItem key={grade} value={grade}>
                                 Grade {grade}
@@ -72,11 +84,13 @@ export default function TestManagementPage() {
                 <Select
                     value={subjectFilter}
                     onValueChange={(value) => setSubjectFilter(value)}
-                    disabled={!subjectOptions.length} // Disable if no subjects are available
                 >
-                    <SelectTrigger className="w-1/3">Subject</SelectTrigger>
+                    <SelectTrigger className="w-1/3">
+                        <SelectValue placeholder="Subject"/>
+                    </SelectTrigger>
                     <SelectContent>
-                        {subjectOptions.map((subject) => (
+                        <SelectItem value="All Subjects">All Subjects</SelectItem>
+                        {(GRADE_SUBJECT_MAP[gradeFilter] || []).map((subject) => (
                             <SelectItem key={subject} value={subject}>
                                 {subject}
                             </SelectItem>
