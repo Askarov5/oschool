@@ -5,28 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
+import { ITest } from '@/lib/types';
 
-interface Question {
-  id: number;
-  type: 'multipleChoice' | 'trueFalse' | 'shortAnswer';
-  questionText: string;
-  options?: string[];
-  answer: string;
-  explanation?: string;
-}
-
-interface PreviewTestProps {
-  test: {
-    title: string;
-    grade: string;
-    level: string;
-    subject: string;
-    passRate: number;
-    questions: Question[];
-  };
-}
-
-export default function PreviewTest({ test }: PreviewTestProps) {
+export default function PreviewTest({ test }: { test: ITest }) {
   const [answers, setAnswers] = useState<string[]>(Array(test.questions.length).fill(''));
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
@@ -119,15 +100,15 @@ export default function PreviewTest({ test }: PreviewTestProps) {
                 {question.type === 'trueFalse' && (
                   <div className="mt-2">
                     <div className="flex mt-2 space-x-4">
-                      <Button 
-                        variant="outline" 
-                        onClick={() => handleAnswerChange(index, 'true')} 
+                      <Button
+                        variant="outline"
+                        onClick={() => handleAnswerChange(index, 'true')}
                         className={`w-full ${answers[index] === 'true' ? 'bg-blue-100' : ''}`}>
                         True
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        onClick={() => handleAnswerChange(index, 'false')} 
+                      <Button
+                        variant="outline"
+                        onClick={() => handleAnswerChange(index, 'false')}
                         className={`w-full ${answers[index] === 'false' ? 'bg-blue-100' : ''}`}>
                         False
                       </Button>

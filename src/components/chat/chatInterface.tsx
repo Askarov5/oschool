@@ -6,15 +6,11 @@ import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Mic, Paperclip, Send } from "lucide-react"
+import { IMessage } from "@/lib/types"
 
-type Message = {
-  id: number
-  text: string
-  sender: "user" | "bot"
-}
 
 export default function ChatInterface() {
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState<IMessage[]>([
     { id: 1, text: "Hello! I'm your AI tutor. How can I help you today?", sender: "bot" },
   ])
   const [input, setInput] = useState("")
@@ -28,13 +24,13 @@ export default function ChatInterface() {
 
   const handleSend = () => {
     if (input.trim()) {
-      const newMessage: Message = { id: messages.length + 1, text: input, sender: "user" }
+      const newMessage: IMessage = { id: messages.length + 1, text: input, sender: "user" }
       setMessages([...messages, newMessage])
       setInput("")
       
       // Simulate AI response
       setTimeout(() => {
-        const botResponse: Message = {
+        const botResponse: IMessage = {
           id: messages.length + 2,
           text: `Thanks for your question! I'm processing it and will respond shortly. In the meantime, is there anything else you'd like to know?`,
           sender: "bot"
