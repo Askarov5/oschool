@@ -1,13 +1,17 @@
+
+export type TQuestionType = 'multipleChoice' | 'trueFalse' | 'shortAnswer';
+
 export interface IQuestion {
     id: number;
-    type: 'multipleChoice' | 'trueFalse' | 'shortAnswer';
+    type: TQuestionType;
     questionText: string;
     options?: string[];
-    answer: string;
+    answer: string | boolean;
     explanation?: string;
 }
 
 export interface ITest {
+    id: string;
     title: string;
     grade: string;
     level: string;

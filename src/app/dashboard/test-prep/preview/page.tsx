@@ -4,6 +4,7 @@ import { ITest } from '@/lib/types';
 export default function TestPage() {
   // Example test data
   const test: ITest = {
+    id: 'test-001',
     title: 'Math Quiz',
     grade: '3',
     level: 'beginner',
