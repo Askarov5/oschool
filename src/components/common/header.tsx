@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import * as React from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { GraduationCap, Menu, Search, X } from "lucide-react"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { GraduationCap, Menu, Search, X } from "lucide-react";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -19,11 +19,11 @@ const navItems = [
   { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
-]
+];
 
 export function HeaderNavigation() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-  const [isSearchOpen, setIsSearchOpen] = React.useState(false)
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
 
   return (
     <header className="bg-background border-b sticky top-0 z-50">
@@ -95,5 +95,5 @@ export function HeaderNavigation() {
         </div>
       )}
     </header>
-  )
+  );
 }

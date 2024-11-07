@@ -35,8 +35,8 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-
 ## Introduction
+
 The idea is to create a SaaS-based online education platform for countries with centralized education systems. These systems often use standardized curriculums across the country, meaning students in the same grade level study the same subjects with similar content. This project leverages a uniform curriculum to deliver a cohesive online learning experience that is accessible, personalized, and scalable.
 
 Students will be able to select their grade level upon signing up, giving them access to all subjects relevant to their studies. Each subject is organized into chapters following the standard textbooks. For each chapter, students can access:
@@ -49,11 +49,14 @@ Students will be able to select their grade level upon signing up, giving them a
 This platform offers students a structured, guided educational journey closely aligned with their in-school curriculum and equips them with interactive tools for independent study. The use of AI as a tutor provides accessibility to personalized help for students, improving the chances of academic success.
 
 ## Project Success Factors
+
 - Scalability: Adaptable to multiple countries with a centralized curriculum structure, supporting potential expansion.
 - Cost Efficiency: Once established, content production and AI tutoring costs can be relatively low compared to live tutoring.
 - Engagement: Video lessons and interactive exercises will keep students engaged.
 - Accessibility: Available to students at any time, especially valuable for those with limited access to quality education or supplemental tutoring.
+
 ## Potential Challenges
+
 - Curriculum Customization: Requires precise alignment with each country’s curriculum, potentially requiring customization.
 - Content Production Costs: Initial costs for quality video production and exercise creation could be high.
--  Regulatory Compliance: Different countries have distinct requirements for educational content that may require modifications.
+- Regulatory Compliance: Different countries have distinct requirements for educational content that may require modifications.

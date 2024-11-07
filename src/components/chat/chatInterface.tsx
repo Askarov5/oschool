@@ -1,44 +1,51 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Mic, Paperclip, Send } from "lucide-react"
-import { IMessage } from "@/lib/types"
-
+import { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Mic, Paperclip, Send } from "lucide-react";
+import { IMessage } from "@/lib/types";
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState<IMessage[]>([
-    { id: 1, text: "Hello! I'm your AI tutor. How can I help you today?", sender: "bot" },
-  ])
-  const [input, setInput] = useState("")
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+    {
+      id: 1,
+      text: "Hello! I'm your AI tutor. How can I help you today?",
+      sender: "bot",
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
-  useEffect(scrollToBottom, [messages])
+  useEffect(scrollToBottom, [messages]);
 
   const handleSend = () => {
     if (input.trim()) {
-      const newMessage: IMessage = { id: messages.length + 1, text: input, sender: "user" }
-      setMessages([...messages, newMessage])
-      setInput("")
-      
+      const newMessage: IMessage = {
+        id: messages.length + 1,
+        text: input,
+        sender: "user",
+      };
+      setMessages([...messages, newMessage]);
+      setInput("");
+
       // Simulate AI response
       setTimeout(() => {
         const botResponse: IMessage = {
           id: messages.length + 2,
           text: `Thanks for your question! I'm processing it and will respond shortly. In the meantime, is there anything else you'd like to know?`,
-          sender: "bot"
-        }
-        setMessages(prevMessages => [...prevMessages, botResponse])
-      }, 1000)
+          sender: "bot",
+        };
+        setMessages((prevMessages) => [...prevMessages, botResponse]);
+      }, 1000);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)] max-w-2xl mx-auto">
@@ -87,5 +94,5 @@ export default function ChatInterface() {
         </div>
       </div>
     </div>
-  )
+  );
 }
