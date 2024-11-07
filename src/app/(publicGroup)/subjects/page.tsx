@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import getSubjectIcon, { getSubjectsByGrade } from '@/lib/subjectIconMap';
 import subjectData from '@/data/subjects'
-import { ISubject, TGrade } from '@/lib/types';
+import { TGrade } from '@/lib/types';
 
 // Define subjects with appropriate Lucide icons
 const subjectsByGrade = getSubjectsByGrade(subjectData);

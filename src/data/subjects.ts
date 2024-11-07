@@ -1,4 +1,4 @@
-import { Subject, ISubject, TGrade } from "../lib/types";
+import { Subject, ISubject } from "../lib/types";
 
 const subjectsData: ISubject[] = [
     {

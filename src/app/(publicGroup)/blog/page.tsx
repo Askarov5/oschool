@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -18,8 +17,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowRight, Calendar, Clock, ThumbsUp, MessageSquare } from "lucide-react"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ArrowRight, Calendar, ThumbsUp, MessageSquare } from "lucide-react"
+import Image from "next/image"
 
 const featuredArticles = [
   {
@@ -134,7 +134,7 @@ export default function BlogPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {featuredArticles.map((article, index) => (
               <Card key={index} className="flex flex-col">
-                <img src={article.image} alt={article.title} className="w-full h-48 object-cover rounded-t-lg" />
+                <Image src={article.image} alt={article.title} className="w-full h-48 object-cover rounded-t-lg" />
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
@@ -213,7 +213,7 @@ export default function BlogPage() {
                       <Calendar className="mr-2 h-4 w-4" />
                       <span>{post.date}</span>
                     </div>
-                    <img src={post.image} alt={post.title} className="w-full h-40 object-cover rounded-md mb-4" />
+                    <Image src={post.image} alt={post.title} className="w-full h-40 object-cover rounded-md mb-4" />
                   </CardContent>
                   <CardFooter className="flex justify-between items-center">
                     <div className="flex items-center">

@@ -1,5 +1,3 @@
-import { ReactElement, ReactNode } from "react";
-
 export type TQuestionType = 'multipleChoice' | 'trueFalse' | 'shortAnswer';
 
 export interface IQuestion {
@@ -51,7 +49,7 @@ export enum Subject {
     Biology = 'Biology',
     Chemistry = 'Chemistry',
    
-    ComputerScience = 'ComputerScience',
+    ComputerScience = 'Computer Science',
     Physics = 'Physics',
     Astronomy = 'Astronomy',
 

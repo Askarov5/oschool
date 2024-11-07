@@ -1,8 +1,7 @@
 import { ReactNode } from "react";
 import { Subject, TGrade } from "./types";
 
-import { Calculator, Sigma, Radius, BookOpen, Globe, Microscope, Orbit, Atom, Tangent, Omega, Telescope, FlaskConical, FileClock, BookOpenCheck, BookOpenText, NotebookPen, BookA, BookType, BookUser, Palette, Music, Landmark, Scale, Computer, TrafficCone, Pickaxe } from "lucide-react";
-import subjectsData from "@/data/subjects";
+import { Calculator, Sigma, Radius, BookOpen, Globe, Microscope, Orbit, Atom, Tangent, Omega, FlaskConical, FileClock, BookOpenCheck, BookOpenText, NotebookPen, BookA, BookType, BookUser, Palette, Music, Landmark, Scale, Computer, TrafficCone, Pickaxe } from "lucide-react";
 import { ISubject } from "./types";
 
 const ICON_MAP: { [key in Subject]: ReactNode } = {
@@ -49,9 +48,9 @@ export default function getSubjectIcon (subject: Subject): ReactNode {
 }
 
 export const getSubjectsByGrade = (subjects: ISubject[]) => {
-    let subByGrade: {[key in TGrade]: ISubject[]} = {
-        2: [],
+    const subByGrade: {[key in TGrade]: ISubject[]} = {
         1: [],
+        2: [],
         3: [],
         4: [],
         5: [],
@@ -64,7 +63,7 @@ export const getSubjectsByGrade = (subjects: ISubject[]) => {
         12: []
     };
 
-    subjects.forEach((sub, index)=> {
+    subjects.forEach((sub)=> {
         if(sub.grade in subByGrade){
             subByGrade[sub.grade].push(sub);
         } else {

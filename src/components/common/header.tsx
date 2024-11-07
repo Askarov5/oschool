@@ -22,7 +22,7 @@ const navItems = [
 ]
 
 export function HeaderNavigation() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isSearchOpen, setIsSearchOpen] = React.useState(false)
 
   return (
