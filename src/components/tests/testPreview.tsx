@@ -1,14 +1,16 @@
-'use client'
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Input } from '@/components/ui/input';
-import { ITest } from '@/lib/types';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Input } from "@/components/ui/input";
+import { ITest } from "@/lib/types";
 
 export default function PreviewTest({ test }: { test: ITest }) {
-  const [answers, setAnswers] = useState<string[]>(Array(test.questions.length).fill(''));
+  const [answers, setAnswers] = useState<string[]>(
+    Array(test.questions.length).fill(""),
+  );
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [reviewMode, setReviewMode] = useState(false);
@@ -21,7 +23,7 @@ export default function PreviewTest({ test }: { test: ITest }) {
 
   const handleSubmit = () => {
     const correctAnswers = test.questions.filter(
-      (question, index) => question.answer === answers[index]
+      (question, index) => question.answer === answers[index],
     ).length;
     setScore(correctAnswers);
     setSubmitted(true);
@@ -43,23 +45,48 @@ export default function PreviewTest({ test }: { test: ITest }) {
           <div className="text-center">
             <h2 className="text-2xl font-bold">Results</h2>
             <p className="text-lg mt-2">
-              You scored <span className="font-semibold">{score}</span> out of <span className="font-semibold">{test.questions.length}</span>
+              You scored <span className="font-semibold">{score}</span> out of{" "}
+              <span className="font-semibold">{test.questions.length}</span>
             </p>
-            <Button variant="outline" onClick={toggleReviewMode} className="mt-4">
-              {reviewMode ? 'Hide Explanations' : 'Review Answers'}
+            <Button
+              variant="outline"
+              onClick={toggleReviewMode}
+              className="mt-4"
+            >
+              {reviewMode ? "Hide Explanations" : "Review Answers"}
             </Button>
 
             {reviewMode && (
               <div className="mt-6 space-y-4">
                 {test.questions.map((question, index) => (
-                  <div key={index} className={`border p-4 rounded-md ${answers[index] === question.answer ? 'bg-green-100' : 'bg-red-100'}`}>
-                    <p className="text-lg font-medium">{question.questionText}</p>
-                    {question.type === 'multipleChoice' && question.options && (
-                      <RadioGroup value={answers[index]} onValueChange={(value) => handleAnswerChange(index, value)} className="mt-2">
+                  <div
+                    key={index}
+                    className={`border p-4 rounded-md ${answers[index] === question.answer ? "bg-green-100" : "bg-red-100"}`}
+                  >
+                    <p className="text-lg font-medium">
+                      {question.questionText}
+                    </p>
+                    {question.type === "multipleChoice" && question.options && (
+                      <RadioGroup
+                        value={answers[index]}
+                        onValueChange={(value) =>
+                          handleAnswerChange(index, value)
+                        }
+                        className="mt-2"
+                      >
                         {question.options.map((option, idx) => (
                           <div key={idx} className="flex items-center mb-2">
-                            <RadioGroupItem value={option} id={`review-question-${index}-option-${idx}`} className="mr-2" />
-                            <label htmlFor={`review-question-${index}-option-${idx}`} className="cursor-pointer">{option}</label>
+                            <RadioGroupItem
+                              value={option}
+                              id={`review-question-${index}-option-${idx}`}
+                              className="mr-2"
+                            />
+                            <label
+                              htmlFor={`review-question-${index}-option-${idx}`}
+                              className="cursor-pointer"
+                            >
+                              {option}
+                            </label>
                           </div>
                         ))}
                       </RadioGroup>
@@ -83,45 +110,65 @@ export default function PreviewTest({ test }: { test: ITest }) {
         ) : (
           <div className="space-y-6">
             {test.questions.map((question, index) => (
-              <div key={index} className="border p-4 rounded-md bg-white shadow-sm">
+              <div
+                key={index}
+                className="border p-4 rounded-md bg-white shadow-sm"
+              >
                 <p className="text-lg font-medium">{question.questionText}</p>
 
-                {question.type === 'multipleChoice' && question.options && (
-                  <RadioGroup value={answers[index]} onValueChange={(value) => handleAnswerChange(index, value)} className="mt-2">
+                {question.type === "multipleChoice" && question.options && (
+                  <RadioGroup
+                    value={answers[index]}
+                    onValueChange={(value) => handleAnswerChange(index, value)}
+                    className="mt-2"
+                  >
                     {question.options.map((option, idx) => (
                       <div key={idx} className="flex items-center mb-2">
-                        <RadioGroupItem value={option} id={`question-${index}-option-${idx}`} className="mr-2" />
-                        <label htmlFor={`question-${index}-option-${idx}`} className="cursor-pointer">{option}</label>
+                        <RadioGroupItem
+                          value={option}
+                          id={`question-${index}-option-${idx}`}
+                          className="mr-2"
+                        />
+                        <label
+                          htmlFor={`question-${index}-option-${idx}`}
+                          className="cursor-pointer"
+                        >
+                          {option}
+                        </label>
                       </div>
                     ))}
                   </RadioGroup>
                 )}
 
-                {question.type === 'trueFalse' && (
+                {question.type === "trueFalse" && (
                   <div className="mt-2">
                     <div className="flex mt-2 space-x-4">
                       <Button
                         variant="outline"
-                        onClick={() => handleAnswerChange(index, 'true')}
-                        className={`w-full ${answers[index] === 'true' ? 'bg-blue-100' : ''}`}>
+                        onClick={() => handleAnswerChange(index, "true")}
+                        className={`w-full ${answers[index] === "true" ? "bg-blue-100" : ""}`}
+                      >
                         True
                       </Button>
                       <Button
                         variant="outline"
-                        onClick={() => handleAnswerChange(index, 'false')}
-                        className={`w-full ${answers[index] === 'false' ? 'bg-blue-100' : ''}`}>
+                        onClick={() => handleAnswerChange(index, "false")}
+                        className={`w-full ${answers[index] === "false" ? "bg-blue-100" : ""}`}
+                      >
                         False
                       </Button>
                     </div>
                   </div>
                 )}
 
-                {question.type === 'shortAnswer' && (
+                {question.type === "shortAnswer" && (
                   <div className="mt-2">
                     <Input
                       type="text"
                       value={answers[index]}
-                      onChange={(e) => handleAnswerChange(index, e.target.value)}
+                      onChange={(e) =>
+                        handleAnswerChange(index, e.target.value)
+                      }
                       placeholder="Your answer"
                       className="border rounded-md w-full p-2"
                     />
@@ -130,7 +177,11 @@ export default function PreviewTest({ test }: { test: ITest }) {
               </div>
             ))}
 
-            <Button variant="default" onClick={handleSubmit} className="w-full mt-6">
+            <Button
+              variant="default"
+              onClick={handleSubmit}
+              className="w-full mt-6"
+            >
               Submit Answers
             </Button>
           </div>
