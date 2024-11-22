@@ -23,8 +23,9 @@ import Link from "next/link";
 
 const navItems = [
   { name: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
-  { name: "Test Preps", icon: GraduationCap, href: "/dashboard/test-preps" },
+  { name: "Test Preps", icon: GraduationCap, href: "/dashboard/test-prep" },
   { name: "Subjects", icon: BookOpen, href: "/dashboard/subjects" },
+  { name: "Library", icon: BookOpen, href: "/dashboard/library" },
   { name: "Curriculum", icon: Layers, href: "/dashboard/curriculum" },
   { name: "Courses", icon: Shapes, href: "/dashboard/courses" },
   { name: "Add-ons", icon: PlusCircle, href: "/dashboard/add-ons" },
